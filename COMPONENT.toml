@@ -1,0 +1,7 @@
+name = "SigmaOS-terminal"
+schema_version = 1
+responsibility = "Terminal component boundary; implementation not yet established"
+integration_repository = "https://github.com/AaryanSinghChauhan09/SigmaOS"
+canonical_branch = "main"
+status = "scaffold"
+license = "NOASSERTION"

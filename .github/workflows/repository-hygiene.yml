@@ -10,6 +10,33 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Require a non-empty README
-        run: test -s README.md
+      - name: Validate component contract and README
+        run: |
+          python3 - <<'PY'
+          import tomllib
+          from pathlib import Path
+
+          required = {
+              "name",
+              "schema_version",
+              "responsibility",
+              "integration_repository",
+              "canonical_branch",
+              "status",
+              "license",
+          }
+          contract = tomllib.loads(Path("COMPONENT.toml").read_text())
+          missing = sorted(required - contract.keys())
+          if missing:
+              raise SystemExit(f"COMPONENT.toml is missing: {', '.join(missing)}")
+          if contract["name"] != "SigmaOS-terminal":
+              raise SystemExit("component name does not match repository")
+          if contract["canonical_branch"] != "main":
+              raise SystemExit("canonical_branch must be main")
+          if contract["status"] not in {"scaffold", "prototype", "implemented", "verified", "released"}:
+              raise SystemExit(f"unsupported status: {contract['status']}")
+          if not Path("README.md").is_file() or not Path("README.md").read_text().strip():
+              raise SystemExit("a non-empty README.md is required")
+          print(f"validated {contract['name']} ({contract['status']})")
+          PY
 
