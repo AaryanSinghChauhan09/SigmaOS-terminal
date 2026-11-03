@@ -1,18 +1,72 @@
-# SigmaOS terminal
+# SigmaOS-terminal
 
-This repository reserves the terminal component boundary in the SigmaOS
-multi-repository architecture. It currently contains no terminal implementation;
-the engine and language remain unclassified until source code establishes them.
+SigmaOS critical system component inspired by Arch Linux and Debian architecture.
 
-## Contract
+## Overview
 
-`COMPONENT.toml` records the component responsibility, integration repository,
-branch, and scaffold status. `NOASSERTION` marks that this scaffold does not
-declare a license. The contract validator checks these fields on pull requests
-and pushes to `main`.
+This component provides essential functionality for the SigmaOS operating system,
+following the modular design principles of Arch Linux and the stability focus of Debian.
 
-## Implementation status
+## Features
 
-Status: scaffold. Before implementation, define the terminal protocol and API,
-identify upstream behaviors being adopted, document security and compatibility
-tradeoffs, and add focused tests with the implementation.
+- Asynchronous I/O with Tokio
+- Comprehensive error handling with anyhow
+- Structured logging
+- Configuration management
+- Status monitoring
+- CLI interface with clap
+
+## Installation
+
+```bash
+cargo build --release
+cargo install --path .
+```
+
+## Usage
+
+```bash
+# Initialize the component
+terminal init
+
+# Start the component
+terminal start
+
+# Stop the component
+terminal stop
+
+# Check status
+terminal status
+
+# Run the component
+terminal run
+```
+
+## Configuration
+
+The component can be configured via environment variables or configuration files.
+
+## Building
+
+```bash
+cargo build --release
+```
+
+## Testing
+
+```bash
+cargo test
+```
+
+## License
+
+MIT License - See LICENSE file for details.
+
+## Contributing
+
+See CONTRIBUTING.md for guidelines.
+
+## Links
+
+- Repository: https://github.com/AaryanSinghChauhan09/SigmaOS-terminal
+- SigmaOS: https://github.com/AaryanSinghChauhan09

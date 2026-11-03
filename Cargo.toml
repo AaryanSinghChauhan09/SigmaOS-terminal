@@ -2,8 +2,16 @@
 name = "terminal"
 version = "0.1.0"
 edition = "2021"
-description = "SigmaOS SigmaOS-terminal component"
+description = "SigmaOS SigmaOS-terminal component - Critical system infrastructure"
 license = "MIT"
 repository = "https://github.com/AaryanSinghChauhan09/SigmaOS-terminal"
 
 [dependencies]
+clap = { version = "4.5", features = ["derive"] }
+tokio = { version = "1.35", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+log = "0.4"
+env_logger = "0.11"
+anyhow = "1.0"
+thiserror = "1.0"
