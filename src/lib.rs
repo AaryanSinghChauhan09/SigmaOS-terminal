@@ -37,7 +37,7 @@ pub trait Component {
 }
 
 /// Component status
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub enum ComponentStatus {
     Running,
     Stopped,
@@ -61,7 +61,7 @@ impl terminal {
 
     pub fn from_config_file<P: AsRef<Path>>(path: P) -> Result<Self> {
         let content = std::fs::read_to_string(path)?;
-        let config: Config = serde_json::from_str(&content)?;
+        let config: Config = toml::from_str(&content)?;
         Ok(Self::new(config))
     }
 }
@@ -81,11 +81,11 @@ impl Component for terminal {
         
         // Initialize logging
         if self.config.debug {
-            env_logger::Builder::from_env(env_logger::Env::default().default_filter_or("debug"))
-                .init();
+            let _ = env_logger::Builder::from_env(env_logger::Env::default().default_filter_or("debug"))
+                .try_init();
         } else {
-            env_logger::Builder::from_env(env_logger::Env::default().default_filter_or(&self.config.log_level))
-                .init();
+            let _ = env_logger::Builder::from_env(env_logger::Env::default().default_filter_or(&self.config.log_level))
+                .try_init();
         }
         
         info!("Component configuration: {:?}", self.config);
