@@ -3,7 +3,7 @@
 //! Critical system infrastructure component for SigmaOS,
 //! inspired by Arch Linux and Debian architecture.
 
-use anyhow::Result;
+pub use anyhow::Result;
 use log::{info, error};
 use serde::{Deserialize, Serialize};
 use std::path::Path;
@@ -139,3 +139,35 @@ mod tests {
         assert!(matches!(component.status(), ComponentStatus::Stopped));
     }
 }
+
+pub mod pty;
+pub mod renderer;
+
+/// Terminal color (RGB).
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct Color {
+    pub r: u8,
+    pub g: u8,
+    pub b: u8,
+}
+
+impl Color {
+    pub const WHITE: Color = Color { r: 255, g: 255, b: 255 };
+    pub const BLACK: Color = Color { r: 0, g: 0, b: 0 };
+}
+
+/// Terminal subsystem errors.
+#[derive(Debug)]
+pub enum TermError {
+    Pty(String),
+}
+
+impl std::fmt::Display for TermError {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Pty(m) => write!(f, "pty error: {m}"),
+        }
+    }
+}
+
+impl std::error::Error for TermError {}

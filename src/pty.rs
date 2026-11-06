@@ -32,7 +32,7 @@ impl Pty {
     /// Resize the terminal window.
     pub fn resize(&mut self, cols: u16, rows: u16) -> Result<()> {
         if cols == 0 || rows == 0 {
-            return Err(TermError::Pty("cols and rows must be > 0".into()));
+            return Err(TermError::Pty("cols and rows must be > 0".into()).into());
         }
         self.cols = cols;
         self.rows = rows;
