@@ -1,7 +1,8 @@
 name = "SigmaOS-terminal"
 schema_version = 1
-responsibility = "Terminal component boundary; implementation not yet established"
+responsibility = "Terminal component infrastructure, PTY lifecycle, and session management"
 integration_repository = "https://github.com/AaryanSinghChauhan09/SigmaOS"
 canonical_branch = "main"
-status = "scaffold"
-license = "NOASSERTION"
+stability = "beta"
+status = "Implemented"
+license = "MIT OR Apache-2.0"

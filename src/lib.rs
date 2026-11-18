@@ -46,12 +46,15 @@ pub enum ComponentStatus {
 }
 
 /// Main component implementation
-pub struct terminal {
+pub struct Terminal {
     config: Config,
     status: ComponentStatus,
 }
 
-impl terminal {
+#[allow(non_camel_case_types)]
+pub type terminal = Terminal;
+
+impl Terminal {
     pub fn new(config: Config) -> Self {
         Self {
             config,
@@ -66,7 +69,7 @@ impl terminal {
     }
 }
 
-impl Component for terminal {
+impl Component for Terminal {
     fn name(&self) -> &str {
         "SigmaOS-terminal"
     }
